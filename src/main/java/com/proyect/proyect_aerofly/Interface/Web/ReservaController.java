@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proyect.proyect_aerofly.Application.UseCase.CancelarReservaUseCase;
 import com.proyect.proyect_aerofly.Application.UseCase.CrearReservaUseCase;
+import com.proyect.proyect_aerofly.Domain.Entities.Reserva;
 
 @RestController
-@RequestMapping("/api/reservas")  // base URL para este recurso
+@RequestMapping("/api/reservas")
 public class ReservaController {
 
     private final CrearReservaUseCase crearReservaUseCase;
@@ -23,25 +24,27 @@ public class ReservaController {
         this.cancelarReservaUseCase = cancelarReservaUseCase;
     }
 
-    // POST /api/reservas
     @PostMapping
-    public ResponseEntity<?> crearReserva(@RequestParam Long clienteId, @RequestParam Long viajeId) {
+    public ResponseEntity<Reserva> crearReserva(@RequestParam Long clienteId, @RequestParam Long viajeId) {
         try {
-            var reserva = crearReservaUseCase.ejecutar(clienteId, viajeId);
+            Reserva reserva = crearReservaUseCase.ejecutar(clienteId, viajeId);
             return ResponseEntity.ok(reserva);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
     }
 
-    // PUT /api/reservas/{id}/cancelar
     @PutMapping("/{id}/cancelar")
-    public ResponseEntity<?> cancelarReserva(@PathVariable Long id) {
+    public ResponseEntity<Void> cancelarReserva(@PathVariable Long id) {
         try {
             cancelarReservaUseCase.ejecutar(id);
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
     }
 }

@@ -16,4 +16,7 @@ public interface ClienteRepository {
     Cliente actualizar(Cliente cliente);
 
     void eliminarPorId(Long id);
+
+    
+    
 }

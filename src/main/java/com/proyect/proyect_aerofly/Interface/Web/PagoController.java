@@ -26,7 +26,9 @@ public class PagoController {
             Pago resultado = registrarPagoUseCase.ejecutar(reservaId, pago);
             return ResponseEntity.ok(resultado);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(null);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
