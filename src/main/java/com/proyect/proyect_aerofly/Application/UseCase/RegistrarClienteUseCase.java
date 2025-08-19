@@ -1,4 +1,4 @@
-package com.proyect.proyect_aerofly.Domain.Repository;
+package com.proyect.proyect_aerofly.Application.UseCase;
 
 import java.util.List;
 

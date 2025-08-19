@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.proyect.proyect_aerofly.Domain.Entities.Reserva;
+import com.proyect.proyect_aerofly.Domain.Entities.ReservaEntity;
 
 public interface ReservaRepository {
 
@@ -16,4 +17,6 @@ public interface ReservaRepository {
     List<Reserva> listarTodos();
 
     void eliminarPorId(Long id);
+    
+    List<ReservaEntity> findByClienteId(Long clienteId);
 }

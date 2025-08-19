@@ -1,8 +1,10 @@
-package com.proyect.proyect_aerofly.Domain.Repository;
+package com.proyect.proyect_aerofly.Application.Services;
 
 import java.util.Optional;
 
+import com.proyect.proyect_aerofly.Application.UseCase.BuscarClienteUseCase;
 import com.proyect.proyect_aerofly.Domain.Entities.Cliente;
+import com.proyect.proyect_aerofly.Domain.Repository.ClienteRepository;
 
 public class BuscarClienteService implements BuscarClienteUseCase {
 

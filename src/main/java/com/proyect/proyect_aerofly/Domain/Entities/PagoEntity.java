@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Pago")
+@Table(name = "pago")
 public class PagoEntity {
 
     @Id
@@ -20,43 +20,28 @@ public class PagoEntity {
 
     private double monto;
 
+    private String metodoPago;
+
     private LocalDateTime fechaPago;
 
     @ManyToOne
     @JoinColumn(name = "reserva_id")
     private ReservaEntity reserva;
 
-    // Getters y Setters
+    // Getters y setters
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public double getMonto() { return monto; }
+    public void setMonto(double monto) { this.monto = monto; }
 
-    public double getMonto() {
-        return monto;
-    }
+    public String getMetodoPago() { return metodoPago; }
+    public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
 
-    public void setMonto(double monto) {
-        this.monto = monto;
-    }
+    public LocalDateTime getFechaPago() { return fechaPago; }
+    public void setFechaPago(LocalDateTime fechaPago) { this.fechaPago = fechaPago; }
 
-    public LocalDateTime getFechaPago() {
-        return fechaPago;
-    }
-
-    public void setFechaPago(LocalDateTime fechaPago) {
-        this.fechaPago = fechaPago;
-    }
-
-    public ReservaEntity getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(ReservaEntity reserva) {
-        this.reserva = reserva;
-    }
+    public ReservaEntity getReserva() { return reserva; }
+    public void setReserva(ReservaEntity reserva) { this.reserva = reserva; }
 }

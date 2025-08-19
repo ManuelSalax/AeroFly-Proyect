@@ -6,11 +6,11 @@ public class Reserva {
 
     private Long id;
     private Cliente cliente;
-    private Viaje viaje;
+    private Vuelo viaje;
     private LocalDate fechaReserva; 
     private EstadoReserva estado;
 
-    public Reserva(Long id, Cliente cliente, Viaje viaje, LocalDate fechaReserva) {
+    public Reserva(Long id, Cliente cliente, Vuelo viaje, LocalDate fechaReserva) {
         this.id = id;
         this.cliente = cliente;
         this.viaje = viaje;
@@ -21,7 +21,7 @@ public class Reserva {
     // Getters
     public Long getId() { return id; }
     public Cliente getCliente() { return cliente; }
-    public Viaje getViaje() { return viaje; }
+    public Vuelo getViaje() { return viaje; }
     public LocalDate getFechaReserva() { return fechaReserva; }
     public EstadoReserva getEstado() { return estado; }
 

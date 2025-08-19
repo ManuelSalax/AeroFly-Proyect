@@ -1,25 +1,35 @@
 package com.proyect.proyect_aerofly.Infrastructure.Config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.proyect.proyect_aerofly.Application.UseCase.CancelarReservaService;
+import com.proyect.proyect_aerofly.Application.Services.BuscarClienteService;
+import com.proyect.proyect_aerofly.Application.Services.BuscarViajesPorDestinoService;
+import com.proyect.proyect_aerofly.Application.Services.CancelarReservaService;
+import com.proyect.proyect_aerofly.Application.Services.CrearReservaService;
+import com.proyect.proyect_aerofly.Application.Services.ListarPagosService;
+import com.proyect.proyect_aerofly.Application.Services.ListarUsuariosService;
+import com.proyect.proyect_aerofly.Application.Services.ListarViajesService;
+import com.proyect.proyect_aerofly.Application.Services.RegistrarClienteService;
+import com.proyect.proyect_aerofly.Application.Services.RegistrarUsuarioService;
+import com.proyect.proyect_aerofly.Application.UseCase.BuscarClienteUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.BuscarViajesPorDestinoUseCase;
 import com.proyect.proyect_aerofly.Application.UseCase.CancelarReservaUseCase;
-import com.proyect.proyect_aerofly.Application.UseCase.CrearReservaService;
 import com.proyect.proyect_aerofly.Application.UseCase.CrearReservaUseCase;
-import com.proyect.proyect_aerofly.Domain.Repository.BuscarClienteService;
-import com.proyect.proyect_aerofly.Domain.Repository.BuscarClienteUseCase;
-import com.proyect.proyect_aerofly.Domain.Repository.BuscarViajesPorDestinoService;
-import com.proyect.proyect_aerofly.Domain.Repository.BuscarViajesPorDestinoUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.ListarPagosUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.ListarUsuariosUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.ListarViajesUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.RegistrarClienteUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.RegistrarPagoUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.RegistrarPagoUseCaseImpl;
+import com.proyect.proyect_aerofly.Application.UseCase.RegistrarUsuarioUseCase;
 import com.proyect.proyect_aerofly.Domain.Repository.ClienteRepository;
-import com.proyect.proyect_aerofly.Domain.Repository.ListarViajesService;
-import com.proyect.proyect_aerofly.Domain.Repository.ListarViajesUseCase;
 import com.proyect.proyect_aerofly.Domain.Repository.PagoRepository;
-import com.proyect.proyect_aerofly.Domain.Repository.RegistrarClienteService;
-import com.proyect.proyect_aerofly.Domain.Repository.RegistrarClienteUseCase;
-import com.proyect.proyect_aerofly.Domain.Repository.RegistrarPagoService;
-import com.proyect.proyect_aerofly.Domain.Repository.RegistrarPagoUseCase;
 import com.proyect.proyect_aerofly.Domain.Repository.ReservaRepository;
+import com.proyect.proyect_aerofly.Domain.Repository.UsuarioRepository;
 import com.proyect.proyect_aerofly.Domain.Repository.ViajeRepository;
 
 @Configuration
@@ -27,14 +37,7 @@ public class UseCaseConfig {
 
     // ---------- RESERVAS ----------
 
-    @Bean
-    public CrearReservaUseCase crearReservaUseCase(
-            ClienteRepository clienteRepository,
-            ViajeRepository viajeRepository,
-            ReservaRepository reservaRepository
-    ) {
-        return new CrearReservaService(clienteRepository, viajeRepository, reservaRepository);
-    }
+
 
     @Bean
     public CancelarReservaUseCase cancelarReservaUseCase(ReservaRepository reservaRepository) {
@@ -67,13 +70,53 @@ public class UseCaseConfig {
 
     // ---------- PAGOS ----------
 
+
+    @Bean
+    public RegistrarUsuarioUseCase registrarUsuarioUseCase(
+        @Qualifier("usuarioJpaAdapter") UsuarioRepository usuarioRepository) {
+        return new RegistrarUsuarioService(usuarioRepository);
+    }
     @Bean
     public RegistrarPagoUseCase registrarPagoUseCase(
-            ReservaRepository reservaRepository,
-            PagoRepository pagoRepository
-    ) {
-        return new RegistrarPagoService(reservaRepository, pagoRepository);
+            @Qualifier("reservaJpaAdapter") ReservaRepository reservaRepository,
+            PagoRepository pagoRepository) {
+
+        return new RegistrarPagoUseCaseImpl(reservaRepository, pagoRepository);
     }
+    @Bean
+    public CrearReservaUseCase crearReservaUseCase(
+        ClienteRepository clienteRepository,
+        @Qualifier("vueloJpaAdapter") ViajeRepository viajeRepository,
+        ReservaRepository reservaRepository
+    ) {
+        return new CrearReservaService(clienteRepository, viajeRepository, reservaRepository);
+    }
+    @Bean
+        public WebMvcConfigurer corsConfigurer() {
+            return new WebMvcConfigurer() {
+                @Override
+                public void addCorsMappings(CorsRegistry registry) {
+                    registry.addMapping("/**")
+                            .allowedOrigins("http://localhost:5173")
+                            .allowedMethods("GET", "POST", "PUT", "DELETE");
+                }
+            };
+        }
+
+    @Bean
+    public ListarUsuariosUseCase listarUsuariosUseCase(
+        @Qualifier("usuarioJpaAdapter") UsuarioRepository usuarioRepository) {
+        return new ListarUsuariosService(usuarioRepository);
+    }
+    @Bean
+    public ListarPagosUseCase listarPagosUseCase(PagoRepository pagoRepository) {
+        return new ListarPagosService(pagoRepository);
+    }
+
+
+
+
+}
 
     // ---------- USUARIOS ----------
 
@@ -82,4 +125,4 @@ public class UseCaseConfig {
     // public LoginUseCase loginUseCase(UsuarioRepository usuarioRepository) {
     //     return new LoginService(usuarioRepository);
     // }
-}
+

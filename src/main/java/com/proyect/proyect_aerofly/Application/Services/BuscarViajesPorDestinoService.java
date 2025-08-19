@@ -1,8 +1,10 @@
-package com.proyect.proyect_aerofly.Domain.Repository;
+package com.proyect.proyect_aerofly.Application.Services;
 
 import java.util.List;
 
-import com.proyect.proyect_aerofly.Domain.Entities.Viaje;
+import com.proyect.proyect_aerofly.Application.UseCase.BuscarViajesPorDestinoUseCase;
+import com.proyect.proyect_aerofly.Domain.Entities.Vuelo;
+import com.proyect.proyect_aerofly.Domain.Repository.ViajeRepository;
 
 public class BuscarViajesPorDestinoService implements BuscarViajesPorDestinoUseCase {
 
@@ -13,7 +15,7 @@ public class BuscarViajesPorDestinoService implements BuscarViajesPorDestinoUseC
     }
 
     @Override
-    public List<Viaje> ejecutar(String destino) {
+    public List<Vuelo> ejecutar(String destino) {
         return viajeRepository.buscarPorDestino(destino);
     }
 }

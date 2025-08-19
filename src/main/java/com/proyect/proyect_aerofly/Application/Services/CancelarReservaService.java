@@ -1,5 +1,6 @@
-package com.proyect.proyect_aerofly.Application.UseCase;
+package com.proyect.proyect_aerofly.Application.Services;
 
+import com.proyect.proyect_aerofly.Application.UseCase.CancelarReservaUseCase;
 import com.proyect.proyect_aerofly.Domain.Entities.Reserva;
 import com.proyect.proyect_aerofly.Domain.Repository.ReservaRepository;
 

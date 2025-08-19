@@ -1,7 +1,9 @@
 package com.proyect.proyect_aerofly.Domain.Entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "viaje")  // <-- Aquí indicamos que esta entidad se mapea a la tabla "viaje"
+@Table(name = "viaje")  // Se mapea a la tabla "viaje"
 public class VueloEntity {
 
     @Id
@@ -23,6 +25,9 @@ public class VueloEntity {
     private LocalDateTime fechaLlegada;
 
     private int capacidad;
+
+    @Column(nullable = false)
+    private BigDecimal precio;
 
     // Getters y Setters
 
@@ -72,5 +77,13 @@ public class VueloEntity {
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
     }
 }

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyect.proyect_aerofly.Application.UseCase.BuscarClienteUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.RegistrarClienteUseCase;
 import com.proyect.proyect_aerofly.Domain.Entities.Cliente;
-import com.proyect.proyect_aerofly.Domain.Repository.BuscarClienteUseCase;
-import com.proyect.proyect_aerofly.Domain.Repository.RegistrarClienteUseCase;
 
 @RestController
 @RequestMapping("/api/clientes")

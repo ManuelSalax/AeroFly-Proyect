@@ -1,8 +1,10 @@
-package com.proyect.proyect_aerofly.Domain.Repository;
+package com.proyect.proyect_aerofly.Application.Services;
 
 import java.util.List;
 
-import com.proyect.proyect_aerofly.Domain.Entities.Viaje;
+import com.proyect.proyect_aerofly.Application.UseCase.ListarViajesUseCase;
+import com.proyect.proyect_aerofly.Domain.Entities.Vuelo;
+import com.proyect.proyect_aerofly.Domain.Repository.ViajeRepository;
 
 public class ListarViajesService implements ListarViajesUseCase {
 
@@ -13,7 +15,7 @@ public class ListarViajesService implements ListarViajesUseCase {
     }
 
     @Override
-    public List<Viaje> ejecutar() {
+    public List<Vuelo> ejecutar() {
         return viajeRepository.listarTodos();
     }
 }

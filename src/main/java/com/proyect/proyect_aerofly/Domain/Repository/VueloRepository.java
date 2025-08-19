@@ -1,10 +1,10 @@
 package com.proyect.proyect_aerofly.Domain.Repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
-import com.proyect.proyect_aerofly.Domain.Entities.VueloEntity;
+import com.proyect.proyect_aerofly.Domain.Entities.Vuelo;
 
-@Repository
-public interface VueloRepository extends JpaRepository<VueloEntity, Long> {
+public interface VueloRepository {
+    Vuelo guardar(Vuelo viaje);
+    Optional<Vuelo> buscarPorId(Long id);
 }

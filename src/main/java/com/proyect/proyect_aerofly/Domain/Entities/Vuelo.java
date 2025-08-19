@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Viaje {
+public class Vuelo {
 
     private Long id;
     private String destino;
@@ -13,16 +13,17 @@ public class Viaje {
     private BigDecimal precio;
     private String descripcion;
     private List<Itinerario> itinerario;
-
-    public Viaje(Long id, String destino, LocalDate fechaInicio, LocalDate fechaFin, BigDecimal precio, String descripcion) {
+    private String origen;
+    
+    public Vuelo(Long id, String destino, LocalDate fechaInicio, LocalDate fechaFin, BigDecimal precio, String descripcion, String origen) {
         this.id = id;
         this.destino = destino;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.origen = origen;
     }
-
     // Getters
     public Long getId() { return id; }
     public String getDestino() { return destino; }
@@ -31,6 +32,7 @@ public class Viaje {
     public BigDecimal getPrecio() { return precio; }
     public String getDescripcion() { return descripcion; }
     public List<Itinerario> getItinerario() { return itinerario; }
+    public String getOrigen() { return origen; }
 
     // Setters
     public void setDestino(String destino) { this.destino = destino; }
@@ -39,4 +41,5 @@ public class Viaje {
     public void setPrecio(BigDecimal precio) { this.precio = precio; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
     public void setItinerario(List<Itinerario> itinerario) { this.itinerario = itinerario; }
+    public void setOrigen(String origen) { this.origen = origen; }
 }

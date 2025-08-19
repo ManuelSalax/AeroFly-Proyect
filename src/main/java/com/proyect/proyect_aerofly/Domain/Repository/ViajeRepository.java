@@ -4,19 +4,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import com.proyect.proyect_aerofly.Domain.Entities.Viaje;
+import com.proyect.proyect_aerofly.Domain.Entities.Vuelo;
 
 public interface ViajeRepository {
 
-    Viaje guardar(Viaje viaje);
+    Vuelo guardar(Vuelo viaje);
 
-    Optional<Viaje> buscarPorId(Long id);
+    Optional<Vuelo> buscarPorId(Long id);
 
-    List<Viaje> buscarPorDestino(String destino);
+    List<Vuelo> buscarPorDestino(String destino);
 
-    List<Viaje> buscarPorFechas(LocalDate desde, LocalDate hasta);
+    List<Vuelo> buscarPorFechas(LocalDate desde, LocalDate hasta);
 
-    List<Viaje> listarTodos();
+    List<Vuelo> listarTodos();
 
     void eliminarPorId(Long id);
 }

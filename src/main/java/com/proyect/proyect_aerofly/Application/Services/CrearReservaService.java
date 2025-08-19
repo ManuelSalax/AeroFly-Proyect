@@ -1,11 +1,12 @@
-package com.proyect.proyect_aerofly.Application.UseCase;
+package com.proyect.proyect_aerofly.Application.Services;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
+import com.proyect.proyect_aerofly.Application.UseCase.CrearReservaUseCase;
 import com.proyect.proyect_aerofly.Domain.Entities.Cliente;
 import com.proyect.proyect_aerofly.Domain.Entities.Reserva;
-import com.proyect.proyect_aerofly.Domain.Entities.Viaje;
+import com.proyect.proyect_aerofly.Domain.Entities.Vuelo;
 import com.proyect.proyect_aerofly.Domain.Repository.ClienteRepository;
 import com.proyect.proyect_aerofly.Domain.Repository.ReservaRepository;
 import com.proyect.proyect_aerofly.Domain.Repository.ViajeRepository;
@@ -25,7 +26,7 @@ public class CrearReservaService implements CrearReservaUseCase {
     @Override
     public Reserva ejecutar(Long clienteId, Long viajeId) {
         Optional<Cliente> clienteOpt = clienteRepository.buscarPorId(clienteId);
-        Optional<Viaje> viajeOpt = viajeRepository.buscarPorId(viajeId);
+        Optional<Vuelo> viajeOpt = viajeRepository.buscarPorId(viajeId);
 
         if (clienteOpt.isEmpty() || viajeOpt.isEmpty()) {
             throw new IllegalArgumentException("Cliente o viaje no encontrado");

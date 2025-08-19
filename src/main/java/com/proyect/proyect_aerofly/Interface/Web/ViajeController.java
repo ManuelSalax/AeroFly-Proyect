@@ -3,13 +3,14 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyect.proyect_aerofly.Domain.Entities.Viaje;
-import com.proyect.proyect_aerofly.Domain.Repository.ListarViajesUseCase;
+import com.proyect.proyect_aerofly.Application.UseCase.ListarViajesUseCase;
+import com.proyect.proyect_aerofly.Domain.Entities.Vuelo;
 import com.proyect.proyect_aerofly.Domain.Repository.ViajeRepository;
 
 @RestController
@@ -25,13 +26,20 @@ public class ViajeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Viaje>> listar() {
+    public ResponseEntity<List<Vuelo>> listar() {
         return ResponseEntity.ok(listarViajesUseCase.ejecutar());
     }
 
     @PostMapping
-    public ResponseEntity<Viaje> crear(@RequestBody Viaje viaje) {
-        Viaje nuevoViaje = viajeRepository.guardar(viaje);
+    public ResponseEntity<Vuelo> crear(@RequestBody Vuelo viaje) {
+        Vuelo nuevoViaje = viajeRepository.guardar(viaje);
         return ResponseEntity.ok(nuevoViaje);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Vuelo> buscarPorId(@PathVariable Long id) {
+        return viajeRepository.buscarPorId(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 }
